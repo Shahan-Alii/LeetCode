@@ -11,13 +11,13 @@ var minSubArrayLen = function (target, nums) {
     var start = 0;
 
 
-    for (var i = 0; i < nums.length; i++) {
+    for (var right = 0; right < nums.length; right++) {
 
-        windowSum += nums[i];
+        windowSum += nums[right];
 
         while (windowSum >= target) {
 
-            minLength = Math.min(minLength, i - start + 1);
+            minLength = Math.min(minLength, right - start + 1);
 
             windowSum -= nums[start];
             start++;
@@ -28,6 +28,6 @@ var minSubArrayLen = function (target, nums) {
 
     }
 
-    return minLength === Infinity ? 0 : minLength; 
+    return minLength === Infinity ? 0 : minLength;
 
 };
