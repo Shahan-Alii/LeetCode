@@ -3,19 +3,23 @@
  * @param {number} k
  * @return {boolean}
  */
-var containsNearbyDuplicate = function(nums, k) {
-    let map = new Map();
+var containsNearbyDuplicate = function (nums, k) {
+    let window = new Set();
 
     for (let i = 0; i < nums.length; i++) {
-        if (map.has(nums[i])) {
-            let previousIndex = map.get(nums[i]);
-            let temp = Math.abs(i - previousIndex);
-            if (temp <= k) {
-                return true;
-            }
+
+        if (window.has(nums[i])) {
+            return true;
         }
-        
-        map.set(nums[i], i);
+
+
+        window.add(nums[i]);
+
+
+        if (window.size > k) {
+            window.delete(nums[i - k]);
+        }
     }
+
     return false;
 };
