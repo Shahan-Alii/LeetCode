@@ -4,19 +4,12 @@
  */
 var isPowerOfThree = function (n) {
 
-    if (n < 1) {
+    if (n == 0) {
         return false;
+    } else if (n == 1) {
+        return true;
     }
 
-    var temp = 1;
-
-    while (temp <= n) {
-        if (temp == n) {
-            return true;
-        }
-
-        temp *= 3;
-    }
-    return false;
+    return n%3==0 && isPowerOfThree(n/3);
 
 };
