@@ -23,7 +23,7 @@ var longestSubarray = function (nums) {
                 count0--;
             }
             start++;
-            max = Math.max(max, end - start)
+
         }
         max = Math.max(max, end - start)
 
