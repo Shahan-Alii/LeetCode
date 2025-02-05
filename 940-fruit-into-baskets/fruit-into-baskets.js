@@ -8,23 +8,18 @@ var totalFruit = function (fruits) {
 
     var start = 0;
 
-    var fruitMap = new Map();
+    var window = new Map();
 
+    for (let end = 0; end < fruits.length; end++) {
 
-    for (let end = 0; end < fruits.length ; end++) {
+        window.set(fruits[end], (window.get(fruits[end]) || 0) + 1);
 
-        var currentFruit = fruits[end];
+        while (window.size > 2) {
 
-        fruitMap.set(currentFruit, (fruitMap.get(currentFruit) || 0) + 1);
-
-        while (fruitMap.size > 2) {
-
-            var startFruit = fruits[start];
-
-             fruitMap.set(startFruit, fruitMap.get(startFruit) - 1);
-
-            if (fruitMap.get(startFruit) == 0) {
-                fruitMap.delete(startFruit)
+            if (window.get(fruits[start]) > 1) {
+                window.set(fruits[start], window.get(fruits[start]) - 1);
+            } else {
+                window.delete(fruits[start]);
             }
 
             start++;
@@ -32,6 +27,7 @@ var totalFruit = function (fruits) {
         }
 
         max = Math.max(max, end - start + 1);
+
 
     }
 
