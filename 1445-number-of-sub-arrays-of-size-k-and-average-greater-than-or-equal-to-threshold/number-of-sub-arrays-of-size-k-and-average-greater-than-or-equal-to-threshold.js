@@ -6,6 +6,8 @@
  */
 var numOfSubarrays = function (arr, k, threshold) {
 
+if(k>arr.length){return 0;}
+
     let res = 0;
     let currentSum = 0;
     let currentAvg = 0.0;
