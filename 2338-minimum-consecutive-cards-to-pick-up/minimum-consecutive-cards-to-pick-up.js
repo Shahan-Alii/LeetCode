@@ -3,15 +3,17 @@
  * @return {number}
  */
 var minimumCardPickup = function (cards) {
-    let indexMap = new Map();
+    let window = new Set();
+    let left = 0;
     let min = Infinity;
 
     for (let right = 0; right < cards.length; right++) {
-        if (indexMap.has(cards[right])) {
-            let left = indexMap.get(cards[right]);
+        while (window.has(cards[right])) {
             min = Math.min(min, right - left + 1);
+            window.delete(cards[left]);
+            left++;
         }
-        indexMap.set(cards[right], right); // Update index of the card
+        window.add(cards[right]);
     }
 
     return min === Infinity ? -1 : min;
