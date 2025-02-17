@@ -10,7 +10,7 @@ var numSubarraysWithSum = function (nums, goal) {
 };
 
 function countAtMax(nums, goal) {
-    
+    if (goal < 0) return 0;
     let left = 0;
     let window = 0;
     let count = 0;
@@ -19,7 +19,7 @@ function countAtMax(nums, goal) {
 
         window += nums[right];
 
-        while (window > goal && left<=right) {
+        while (window > goal && left <= right) {
             window -= nums[left];
             left++;
         }
