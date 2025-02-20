@@ -4,14 +4,14 @@
  */
 var longestSemiRepetitiveSubstring = function (s) {
 
-    if (s.length == 1) { return 1 }
+ 
 
     let max = 0;
     let count = 0;
 
     let left = 0;
 
-    for (let right = 1; right < s.length; right++) {
+    for (let right = 0; right < s.length; right++) {
 
         if (s[right] == s[right - 1]) {
             count++;
