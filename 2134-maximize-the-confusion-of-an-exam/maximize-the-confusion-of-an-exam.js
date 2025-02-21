@@ -38,9 +38,8 @@ var maxConsecutiveAnswers = function (answerKey, k) {
 
         }
 
-        currentMax = Math.max(right - l_true + 1, right - l_false + 1);
+        max = Math.max(max, right - l_true + 1, right - l_false + 1);
 
-        max = Math.max(max, currentMax);
     }
 
     return max;
