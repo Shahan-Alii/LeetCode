@@ -1,48 +1,34 @@
-/**
- * @param {string} answerKey
- * @param {number} k
- * @return {number}
- */
 var maxConsecutiveAnswers = function (answerKey, k) {
+    let maxLen = 0;
+    let left = 0;
+    let countF = 0;
 
-    let max = 0;
-    let l_true = 0;
-    let l_false = 0;
-
-    let count_true = 0;
-    let count_false = 0;
-
+    // Case 1: Try flipping "F" to "T"
     for (let right = 0; right < answerKey.length; right++) {
+        if (answerKey[right] === 'F') countF++;
 
-        if (answerKey[right] == "T") {
-            count_true++;
-        } else {
-            count_false++;
+        while (countF > k) {
+            if (answerKey[left] === 'F') countF--;
+            left++;
         }
 
-        while (count_false > k) {
-
-            if (answerKey[l_true] == "F") {
-                count_false--;
-            }
-            l_true++;
-
-        }
-
-        while (count_true > k) {
-
-            if (answerKey[l_false] == "T") {
-                count_true--;
-            }
-            l_false++;
-
-        }
-
-        currentMax = Math.max(right - l_true + 1, right - l_false + 1);
-
-        max = Math.max(max, currentMax);
+        maxLen = Math.max(maxLen, right - left + 1);
     }
 
-    return max;
+    // Reset variables to check for flipping "T" to "F"
+    left = 0;
+    let countT = 0;
 
+    for (let right = 0; right < answerKey.length; right++) {
+        if (answerKey[right] === 'T') countT++;
+
+        while (countT > k) {
+            if (answerKey[left] === 'T') countT--;
+            left++;
+        }
+
+        maxLen = Math.max(maxLen, right - left + 1);
+    }
+
+    return maxLen;
 };
