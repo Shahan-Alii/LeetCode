@@ -1,30 +1,19 @@
-/**
- * @param {number[]} nums1
- * @param {number[]} nums2
- * @return {number[]}
- */
 var intersection = function (nums1, nums2) {
-
-    nums1.sort((a, b) => a - b);
-    nums2.sort((a, b) => a - b);
-
-    let i = 0, j = 0;
+    let map = new Map();
     let result = [];
 
-    while (i < nums1.length && j < nums2.length) {
-        if (nums1[i] === nums2[j]) {
-            if (result.length === 0 || result[result.length - 1] !== nums1[i]) {
-                result.push(nums1[i]);
-            }
-            i++;
-            j++;
-        } else if (nums1[i] < nums2[j]) {
-            i++;
-        } else {
-            j++;
+    // Store all elements of nums1 in a HashMap
+    for (let num of nums1) {
+        map.set(num, 1); // Store unique elements only
+    }
+
+    // Iterate through nums2 and check for common elements
+    for (let num of nums2) {
+        if (map.has(num)) {
+            result.push(num);
+            map.delete(num); // Ensure uniqueness by deleting after adding
         }
     }
 
     return result;
-
 };
