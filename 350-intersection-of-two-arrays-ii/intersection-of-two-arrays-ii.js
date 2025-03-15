@@ -6,23 +6,21 @@
 var intersect = function (nums1, nums2) {
 
 
-    nums1.sort((a, b) => a - b);
-    nums2.sort((a, b) => a - b);
+    if (nums1.length > nums2.length) return intersect(nums2, nums1); // Ensure nums1 is smaller
 
-    let i = 0, j = 0;
+    let map = new Map();
     let result = [];
 
-    while (i < nums1.length && j < nums2.length) {
-        if (nums1[i] === nums2[j]) {
+    // Store frequencies of nums1 elements
+    for (let num of nums1) {
+        map.set(num, (map.get(num) || 0) + 1);
+    }
 
-            result.push(nums1[i]);
-
-            i++;
-            j++;
-        } else if (nums1[i] < nums2[j]) {
-            i++;
-        } else {
-            j++;
+    // Check intersection with nums2
+    for (let num of nums2) {
+        if (map.has(num) && map.get(num) > 0) {
+            result.push(num);
+            map.set(num, map.get(num) - 1);
         }
     }
 
