@@ -6,25 +6,37 @@
 var threeSumClosest = function (nums, target) {
 
 
+    nums.sort((a, b) => a - b)
+
     let min = Infinity;
     let min_sum = 0;
 
-    for (let i = 0; i < nums.length; i++) {
+    for (let i = 0; i < nums.length - 2; i++) {
 
-        for (let j = i + 1; j < nums.length; j++) {
+        let left = i + 1; let right = nums.length - 1;
 
-            for (let k = j + 1; k < nums.length; k++) {
+        while (left < right) {
 
-                let sum = nums[i] + nums[j] + nums[k];
-                let diff = Math.abs(sum - target);
 
-                if (diff < min) {
-                    min = diff;
-                    min_sum = sum;
-                }
 
+            let sum = nums[left] + nums[right] + nums[i];
+
+            if (sum == target) {
+                return sum;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
             }
+
+            let diff = Math.abs(sum - target);
+            if (diff < min) {
+                min = diff;
+                min_sum = sum;
+            }
+
         }
+
 
     }
     return min_sum;
