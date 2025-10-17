@@ -1,28 +1,28 @@
-function maxProduct(nums) {
-  let maxProd = nums[0];
-  let minProd = nums[0];
-  let result = nums[0];
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxProduct = function (nums) {
 
-  for (let i = 1; i < nums.length; i++) {
-    const curr = nums[i];
+    let n = nums.length;
+    let leftProduct = 1;
+    let rightProduct = 1;
+    let res = nums[0];
 
-    // If current element is negative, swap maxProd and minProd
-    if (curr < 0) {
-      [maxProd, minProd] = [minProd, maxProd];
+    for (let i = 0; i < nums.length; i++) {
+
+
+        leftProduct = leftProduct == 0 ? 1 : leftProduct;
+        rightProduct = rightProduct == 0 ? 1 : rightProduct;
+
+
+        leftProduct *= nums[i];
+        rightProduct *= nums[n - 1 - i];
+
+        res = Math.max(res, leftProduct, rightProduct)
+
     }
 
-    // Update max and min products
-    maxProd = Math.max(curr, maxProd * curr);
-    minProd = Math.min(curr, minProd * curr);
+    return res;
 
-    // Update the global result
-    result = Math.max(result, maxProd);
-  }
-
-  return result;
-}
-
-// Example:
-console.log(maxProduct([2, 3, -2, 4])); // Output: 6
-console.log(maxProduct([-2, 0, -1]));  // Output: 0
-console.log(maxProduct([-2, 3, -4]));  // Output: 24
+};
